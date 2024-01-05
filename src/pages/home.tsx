@@ -20,6 +20,7 @@ export const Home = () => {
   return (
     <div>
       <Button variant="contained" onClick={() => logout()}>Log Out</Button>
+      <Button variant="contained" onClick={() => navigate("student-resource")}>Student Resource</Button>
     </div>
   );
 };
