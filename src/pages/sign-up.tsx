@@ -17,6 +17,7 @@ export const SignUp = () => {
   };
 
   const handleSignUp = () => {
+    localStorage.setItem("user", username);
     alert("Login successful");
     navigate("/");
   };

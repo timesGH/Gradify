@@ -18,6 +18,7 @@ export const Login = () => {
 
   const handleLogin = () => {
     if (username === "admin" && password === "admin") {
+      localStorage.setItem("user", username);
       alert("Login successful");
       navigate("/");
     } else {
@@ -40,14 +41,14 @@ export const Login = () => {
         display="flex"
         flexDirection="column"
       >
-        <text>Username:</text>
+        <Box>Username:</Box>
         <TextField
           placeholder="Username"
           variant="outlined"
           value={username}
           onChange={(e) => handleUsername(e)}
         />
-        <text>Password:</text>
+        <Box>Password:</Box>
         <TextField
           placeholder="Password"
           variant="outlined"
