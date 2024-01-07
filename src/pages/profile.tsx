@@ -1,78 +1,79 @@
-import { Box, Container, Typography, Link } from "@mui/material";
+import { Box, Container, Typography, Link, useMediaQuery } from "@mui/material";
 import { colors } from "../utilities";
 import { Link as RouterLink } from "react-router-dom";
 
 export const Profile = () => {
-
-    // const navigate = useNavigate();
+  // This isMobile variable stores if the windows resolution width is less than 600px - if it is mobile
+  const isMobile = useMediaQuery("(max-width:600px)");
 
   return (
-    <div>
-      <Box
-        sx={{
-          backgroundColor: colors.primary,
-          color: colors.white,
-          padding: '20px',
-        }}
-      >
-        <Container maxWidth="lg">
-          <Typography variant="h4" sx={{ marginLeft: -40}}>
-            Gradify</Typography>
-          <Typography variant="subtitle1" sx={{ marginLeft: -39, marginTop: 1}}>
+    <>
+      {/* Try not to use sx because it is same forcing something */}
+      {/* Really appreciate using colors */}
+      <Box bgcolor={colors.primary} color={colors.white} padding={3}>
+        <Container>
+          <Typography variant="h4">Gradify</Typography>
 
+          {/* Using margin is fine when it is only on one component but it is not optimal for using it on repeated components */}
+          {/* When the components are repeated try and you want to give spaces to each of them try to use flex attributes */}
+          <Box
+            display="flex"
+            width={isMobile ? "100vw" : "50vw"}
+            justifyContent="space-between"
+            flexWrap="wrap"
+          >
             <Link component={RouterLink} to="/profile" color="inherit">
-                Profile
+              Profile
             </Link>
 
-            <Link component={RouterLink} to="/student-resource" color="inherit" sx={{ marginLeft: 5}}>
-                Resources
+            <Link component={RouterLink} to="/student-resource" color="inherit">
+              Resources
             </Link>
 
-            <Link component={RouterLink} to="/" color="inherit" sx={{ marginLeft: 5}}>
-                Career
+            <Link component={RouterLink} to="/" color="inherit">
+              Career
             </Link>
 
-            <Link component={RouterLink} to="/" color="inherit" sx={{ marginLeft: 5}}>
-                Forum
+            <Link component={RouterLink} to="/" color="inherit">
+              Forum
             </Link>
 
-            <Link component={RouterLink} to="/" color="inherit" sx={{ marginLeft: 5}}>
-                Help
+            <Link component={RouterLink} to="/" color="inherit">
+              Help
             </Link>
-
-          </Typography>
+          </Box>
         </Container>
       </Box>
 
-       <Box
-        sx={{
-            display: 'flex',
-            alignItems: 'center',
-            padding: '10px'
-          }}
+      {/* When setting size for something always use sizes which is dividable by 4, it is kind of a rule */}
+      <Box
+        display="flex"
+        alignItems="center"
+        padding={1}
+        width={isMobile ? "auto" : "50vw"}
+        justifyContent="space-between"
+        marginLeft={6}
+        flexWrap="wrap"
+      >
+        <Typography
+          variant="h4"
+          color={colors.primary}
+          fontSize={16}
+          fontWeight="bold"
         >
-        <Typography variant="h4" sx={{ color: colors.primary, fontSize: '15px', marginLeft: 20, fontWeight: 'bold'}}>
-            Gradify Console
+          Gradify Console
         </Typography>
 
-        <Typography variant="h4" sx={{ color: colors.primary, fontSize: '15px', marginLeft: 15 }}>
-            Select 1
+        <Typography variant="h4" color={colors.primary} fontSize={16}>
+          Select 1
         </Typography>
 
-        <Typography variant="h4" sx={{ color: colors.primary, fontSize: '15px', marginLeft: 5 }}>
-            Select 2
+        <Typography variant="h4" color={colors.primary} fontSize={16}>
+          Select 2
         </Typography>
-       </Box>
+      </Box>
 
-       <Box
-        sx={{
-            backgroundColor: colors.primary,
-            color: colors.white,
-            padding: '20px',
-          }}
-        >
-
-       </Box>
-      </div>
+      <Box bgcolor={colors.primary} color={colors.white} padding={5} />
+    </>
   );
 };
