@@ -21,6 +21,7 @@ export const Home = () => {
     <div>
       <Button variant="contained" onClick={() => logout()}>Log Out</Button>
       <Button variant="contained" onClick={() => navigate("student-resource")}>Student Resource</Button>
+      <Button variant="contained" onClick={() => navigate("student-discussion-forum")}>Student Discussion Forum</Button>
     </div>
   );
 };
