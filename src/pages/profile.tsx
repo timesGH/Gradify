@@ -5,6 +5,14 @@ import { Link as RouterLink } from "react-router-dom";
 export const Profile = () => {
   // This isMobile variable stores if the windows resolution width is less than 600px - if it is mobile
   const isMobile = useMediaQuery("(max-width:600px)");
+  
+  const handleEditClick = () => {
+    const isConfirmed = window.confirm("Change profile");
+  
+
+  if (isConfirmed)
+    alert("profile changed");
+  }
 
   return (
     <>
@@ -73,7 +81,30 @@ export const Profile = () => {
         </Typography>
       </Box>
 
-      <Box bgcolor={colors.primary} color={colors.white} padding={5} />
+      <Box
+      bgcolor={colors.primary}
+      color={colors.white}
+      padding={5}
+      width="200px"
+      height="200px"
+      borderRadius="50%"
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
+      margin="auto"
+      marginTop={10}
+      >
+      
+      <Typography variant="h4" color={colors.white} fontSize={16} alignItems="center" margin="auto">
+          Profile Picture
+        </Typography>
+      </Box>
+
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", marginTop: 10 }}>
+      <button onClick={handleEditClick} style={{ margin: 0}}>
+        Edit
+      </button>
+      </div>
     </>
   );
 };
