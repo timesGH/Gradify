@@ -84,8 +84,8 @@ export const Profile = () => {
             justifyContent="space-between"
             flexWrap="wrap"
           >
-            <Link component={RouterLink} to="/profile" color="inherit">
-              Profile
+            <Link component={RouterLink} to="/" color="inherit">
+              Home
             </Link>
 
             <Link component={RouterLink} to="/student-resource" color="inherit">
@@ -96,7 +96,7 @@ export const Profile = () => {
               Career
             </Link>
 
-            <Link component={RouterLink} to="/" color="inherit">
+            <Link component={RouterLink} to="/student-discussion-forum" color="inherit">
               Forum
             </Link>
 
