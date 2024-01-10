@@ -1,18 +1,72 @@
-import { Box, Container, Typography, Link, useMediaQuery } from "@mui/material";
+import React, { useState } from "react";
+import {
+  Box,
+  Container,
+  Typography,
+  Link,
+  useMediaQuery,
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+  TextField,
+} from "@mui/material";
 import { colors } from "../utilities";
 import { Link as RouterLink } from "react-router-dom";
 
 export const Profile = () => {
-  // This isMobile variable stores if the windows resolution width is less than 600px - if it is mobile
   const isMobile = useMediaQuery("(max-width:600px)");
-  
-  const handleEditClick = () => {
-    const isConfirmed = window.confirm("Change profile");
-  
+  const [open, setOpen] = useState(false);
+  const [profile, setProfile] = useState({
+    firstName: "first",
+    lastName: "last",
+    description: "Hi, I am first.",
+    faculty: "compsci",
+    interest: "mechanical engineering",
+    profilePicture: "image.jpg",
+  });
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
-  if (isConfirmed)
-    alert("profile changed");
-  }
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleProfileChange = (field: string, value: string) => {
+    setProfile((prevProfile) => ({
+      ...prevProfile,
+      [field]: value,
+    }));
+  };
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files) {
+      setSelectedFile(event.target.files[0]);
+    }
+  };
+
+  const handleSaveChanges = () => {
+    console.log("Updated Profile:", {
+      ...profile,
+      profilePicture: selectedFile
+        ? URL.createObjectURL(selectedFile)
+        : profile.profilePicture,
+    });
+
+    handleClose();
+  };
+
+  const handleUploadAvatar = () => {
+    const inputElement = document.getElementById("profile-picture-input");
+    if (inputElement) {
+      inputElement.click();
+    }
+  };
 
   return (
     <>
@@ -53,7 +107,6 @@ export const Profile = () => {
         </Container>
       </Box>
 
-      {/* When setting size for something always use sizes which is dividable by 4, it is kind of a rule */}
       <Box
         display="flex"
         alignItems="center"
@@ -79,32 +132,132 @@ export const Profile = () => {
         <Typography variant="h4" color={colors.primary} fontSize={16}>
           Select 2
         </Typography>
+
+        <div>
+          <Button variant="contained" onClick={handleOpen}>
+            Edit Profile
+          </Button>
+          <Dialog open={open} onClose={handleClose}>
+            <DialogTitle>Edit Profile</DialogTitle>
+            <DialogContent>
+              <DialogContentText>
+                <TextField
+                  label="First Name"
+                  value={profile.firstName}
+                  onChange={(e) =>
+                    handleProfileChange("firstName", e.target.value)
+                  }
+                  style={{ marginBottom: "10px", marginTop: "10px" }}
+                />
+                <br />
+                <TextField
+                  label="Last Name"
+                  value={profile.lastName}
+                  onChange={(e) =>
+                    handleProfileChange("lastName", e.target.value)
+                  }
+                  style={{ marginBottom: "10px" }}
+                />
+                <br />
+                <TextField
+                  label="Description"
+                  value={profile.description}
+                  onChange={(e) =>
+                    handleProfileChange("description", e.target.value)
+                  }
+                  style={{ marginBottom: "10px" }}
+                />
+                <br />
+                <TextField
+                  label="Faculty"
+                  value={profile.faculty}
+                  onChange={(e) =>
+                    handleProfileChange("faculty", e.target.value)
+                  }
+                  style={{ marginBottom: "10px" }}
+                />
+                <br />
+                <TextField
+                  label="Interest"
+                  value={profile.interest}
+                  onChange={(e) =>
+                    handleProfileChange("interest", e.target.value)
+                  }
+                  style={{ marginBottom: "10px" }}
+                />
+                <br />
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleSaveChanges}>Save Changes</Button>
+              <Button onClick={handleClose}>Close</Button>
+            </DialogActions>
+          </Dialog>
+        </div>
       </Box>
 
-      <Box
-      bgcolor={colors.primary}
-      color={colors.white}
-      padding={5}
-      width="200px"
-      height="200px"
-      borderRadius="50%"
-      display="flex"
-      alignItems="center"
-      justifyContent="center"
-      margin="auto"
-      marginTop={10}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          marginTop: 10,
+        }}
       >
-      
-      <Typography variant="h4" color={colors.white} fontSize={16} alignItems="center" margin="auto">
-          Profile Picture
+        {selectedFile ? (
+          <img
+            src={URL.createObjectURL(selectedFile)}
+            alt="Profile"
+            style={{ width: "200px", height: "200px", borderRadius: "0" }}
+          />
+        ) : (
+          <img
+            src={profile.profilePicture}
+            alt="Profile"
+            style={{ width: "200px", height: "200px", borderRadius: "0" }}
+          />
+        )}
+      </div>
+
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          marginTop: 10,
+        }}
+      >
+        <button onClick={handleUploadAvatar} style={{ margin: 0 }}>
+          Upload Avatar
+        </button>
+        <input
+          id="profile-picture-input"
+          type="file"
+          style={{ display: "none" }}
+          onChange={handleFileChange}
+          accept="image/*"
+        />
+      </div>
+
+      <Box display="flex" flexDirection="column" alignItems="center">
+        <Typography
+          variant="body2"
+          color="textSecondary"
+          style={{ marginTop: "8px" }}
+        >
+          {profile.faculty}
+        </Typography>
+        <Typography variant="body2" color="textSecondary">
+          {profile.interest}
         </Typography>
       </Box>
-
-      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", marginTop: 10 }}>
-      <button onClick={handleEditClick} style={{ margin: 0}}>
-        Edit
-      </button>
-      </div>
+      <input
+        id="profile-picture-input"
+        type="file"
+        style={{ display: "none" }}
+        onChange={handleFileChange}
+        accept="image/*"
+      />
     </>
   );
 };
