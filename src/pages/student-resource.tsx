@@ -1,22 +1,38 @@
-import { Box, MenuItem, TextField } from "@mui/material";
+import { Box, Button, MenuItem, TextField, Typography } from "@mui/material";
 import { colors } from "../utilities";
+import { useNavigate } from "react-router-dom";
 
-const DefaultBox = (props: any) => {
-  const { children } = props;
+const DefaultContentBox = () => {
+  const navigate = useNavigate();
   return (
-    <Box display="flex" flexDirection="column" margin={2}>
-      {children}
+    <Box
+      padding={2}
+      height={250}
+      bgcolor={colors.primary}
+      marginBottom={2}
+      display="flex"
+      flexDirection="column"
+      justifyContent="space-between"
+    >
+      <Box>
+        <Typography color="white" variant="h4">
+          Testing Title
+        </Typography>
+        <Typography variant="body1">Testing Title</Typography>
+      </Box>
+      <Button onClick={() => navigate("/article")} variant="contained">View</Button>
     </Box>
   );
 };
 
-const DefaultContentBox = () => {
-  return <Box width="100%" height={250} bgcolor={colors.primary} />;
-};
-
 export const StudentResource = () => {
   return (
-    <Box>
+    <Box
+      sx={{
+        overflowY: "scroll",
+        overflowX: "hidden",
+      }}
+    >
       <Box display="flex">
         Search by tags
         <TextField select label="tags" helperText="please select tags">
@@ -29,34 +45,22 @@ export const StudentResource = () => {
       <Box
         display="flex"
         flexWrap="wrap"
-        width="100%"
+        width="90%"
+        marginLeft="5%"
         height="auto"
-        padding={2}
         justifyContent="space-evenly"
+        gap={2}
       >
-        {/* Unit Reviews */}
-        <DefaultBox display="flex" flexDirection="column">
-          <h1>Unit Reviews</h1>
-          <DefaultContentBox />
-        </DefaultBox>
-
-        {/* Free Services */}
-        <DefaultBox>
-          <h1>Directories to free services for university students</h1>
-          <DefaultContentBox />
-        </DefaultBox>
-
-        {/* Student Societies */}
-        <DefaultBox>
-          <h1>Student Societies</h1>
-          <DefaultContentBox />
-        </DefaultBox>
-
-        {/* Structuring unit outline */}
-        <DefaultBox>
-          <h1>Structuring unit outline</h1>
-          <DefaultContentBox />
-        </DefaultBox>
+        <DefaultContentBox />
+        <DefaultContentBox />
+        <DefaultContentBox />
+        <DefaultContentBox />
+        <DefaultContentBox />
+        <DefaultContentBox />
+        <DefaultContentBox />
+        <DefaultContentBox />
+        <DefaultContentBox />
+        <DefaultContentBox />
       </Box>
     </Box>
   );
