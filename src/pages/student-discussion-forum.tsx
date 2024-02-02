@@ -1,5 +1,5 @@
-import { Box, List } from "@mui/material";
-import { AdminForumCard, ThreadCard } from "../components";
+import { Box, Button, Container, List, Typography } from "@mui/material";
+import { ThreadCard } from "../components";
 
 export const StudentDiscussionForum = () => {
   const DEMA_THREADS = [
@@ -34,26 +34,37 @@ export const StudentDiscussionForum = () => {
   ];
 
   return (
-    <Box
-      width="100vw"
-      height="100vh"
-      display="flex"
-      justifyContent="space-evenly"
-      flexWrap="wrap"
-      alignItems="center"
-      overflow="auto"
-    >
-      <AdminForumCard />
-      {DEMA_THREADS.map((thread) => {
-        return (
+    <Container>
+      <Box
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        justifyContent="center"
+        paddingY="20px"
+      >
+        <Typography variant="h4">Student Discussion Forum</Typography>
+        <Box display="flex" marginTop="10px">
+          <Button color="primary" variant="contained" sx={{ marginRight: 1 }}>
+            Create Thread
+          </Button>
+          <Button color="secondary" variant="contained" sx={{ marginRight: 1 }}>
+            Saved Threads
+          </Button>
+          <Button variant="outlined">Settings</Button>
+        </Box>
+      </Box>
+
+      <Box display="flex" flexDirection="column" alignItems="center">
+        {DEMA_THREADS.map((thread) => (
           <ThreadCard
+            key={thread.name}
             name={thread.name}
             src={thread.src}
             reaction={thread.reaction}
             description={thread.description}
           />
-        );
-      })}
-    </Box>
+        ))}
+      </Box>
+    </Container>
   );
 };

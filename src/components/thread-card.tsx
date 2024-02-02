@@ -13,7 +13,7 @@ export const ThreadCard = (props: ThreadCardProps) => {
 
   return (
     <Box
-      width={400}
+      width="30%"
       display="flex"
       border="1px solid lightgray"
       borderRadius={4}
