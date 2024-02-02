@@ -13,6 +13,7 @@ import {
   Article,
 } from "./pages";
 import { Navigation } from "./components";
+import { Box } from "@mui/material";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -20,20 +21,22 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Navigation />
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/student-resource" element={<StudentResource />} />
-        <Route
-          path="/student-discussion-forum"
-          element={<StudentDiscussionForum />}
-        />
-        <Route path="/article" element={<Article />} />
-      </Routes>
-    </BrowserRouter>
+    <Box marginTop={8}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/student-resource" element={<StudentResource />} />
+          <Route
+            path="/student-discussion-forum"
+            element={<StudentDiscussionForum />}
+          />
+          <Route path="/article" element={<Article />} />
+        </Routes>
+      </BrowserRouter>
+    </Box>
   </React.StrictMode>
 );
