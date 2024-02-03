@@ -41,12 +41,12 @@ export const Navigation = () => {
                 Profile
               </Typography>
             </Link>
-            <Link href="/student-resource" underline="none">
+            <Link href="/student-discussion-forum" underline="none">
               <Typography variant="h6" color="white">
                 Student Discussion
               </Typography>
             </Link>
-            <Link href="/student-discussion-forum" underline="none">
+            <Link href="/student-resource" underline="none">
               <Typography variant="h6" color="white">
                 Student Resource
               </Typography>

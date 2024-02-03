@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Box,
   Typography,
@@ -21,6 +22,7 @@ export const Profile = () => {
     interest: "Mechanical Engineering",
     profilePicture: "image.jpg",
   });
+  const navigate = useNavigate();
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   const handleOpen = () => {
@@ -132,7 +134,11 @@ export const Profile = () => {
       <Button variant="contained" onClick={handleOpen} style={{ marginTop: "20px" }}>
         Edit Profile
       </Button>
-
+      <Box display="flex" justifyContent="space-between" marginTop={1}>
+      <Button onClick={() => navigate("/article")} variant="outlined">
+          View Saved Articles
+      </Button>
+      </Box>
       <input
         id="profile-picture-input"
         type="file"
